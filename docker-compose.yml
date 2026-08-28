@@ -1,0 +1,38 @@
+# Entorno de desarrollo local opcional.
+#
+# El destino de Calce es Neon, pero para trabajar sin conexion alcanza con un
+# PostgreSQL con pgvector y el proxy WebSocket de Neon, que es lo que el driver
+# `neon-serverless` espera del otro lado. Ver `NEON_WS_PROXY` en .env.example.
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    container_name: calce-postgres
+    environment:
+      POSTGRES_USER: calce
+      POSTGRES_PASSWORD: calce
+      POSTGRES_DB: calce
+    ports:
+      - '5432:5432'
+    volumes:
+      - calce-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U calce -d calce']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  neon-proxy:
+    image: ghcr.io/neondatabase/wsproxy:latest
+    container_name: calce-neon-proxy
+    environment:
+      APPEND_PORT: 'postgres:5432'
+      ALLOW_ADDR_REGEX: '.*'
+      LOG_TRAFFIC: 'false'
+    ports:
+      - '5433:80'
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  calce-pgdata:

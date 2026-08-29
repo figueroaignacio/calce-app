@@ -298,6 +298,64 @@ qué archivos se tocaron: eso ya está en el diff.
 
 El detalle completo de las convenciones de código está en `CLAUDE.md`.
 
+## Plan de trabajo
+
+### Etapas de la cátedra
+
+| Etapa                             | Período        | Entregable                                                                                                   |
+| --------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------ |
+| Propuesta y repositorio           | 10/08 – 30/08  | Propuesta, repositorio creado, estructura base y CI                                                          |
+| Arquitectura y módulos            | 31/08 – 27/09  | Esquema de base de datos migrado, autenticación, ABM de productos y clientes _(otorga condición de Regular)_ |
+| Informe final, video y despliegue | 28/09 – 21/11  | Sistema desplegado, módulo de IA, informe, video en inglés                                                   |
+| Presentación y defensa            | Mesa de examen | Defensa ante el comité                                                                                       |
+
+### Semana a semana — Etapa "Arquitectura y módulos" (31/08 al 27/09)
+
+**Semana 1 (31/08 – 06/09) — Setup y base de datos**
+
+- [ ] Monorepo con pnpm workspaces y los cuatro paquetes creados
+- [ ] CI en GitHub Actions: lint, typecheck, test y build en cada pull request
+- [ ] Esquema completo en `@calce/db` (productos, códigos, aplicaciones, vehículos, clientes, pedidos, stock, usuarios)
+- [ ] Migración inicial generada y aplicada contra Neon, incluida la extensión `pgvector`
+- [ ] Seed de desarrollo con usuarios, marcas, modelos y catálogo de prueba
+
+**Semana 2 (07/09 – 13/09) — Autenticación**
+
+- [ ] Registro y login con hash de contraseña en argon2
+- [ ] Access token y refresh token con expiración configurada por entorno
+- [ ] `JwtAuthGuard` global con decorador `@Public()` para rutas exceptuadas
+- [ ] `RolesGuard` con decorador `@Roles()` sobre los tres roles del dominio
+- [ ] Frontend: pantalla de login, manejo de sesión y rutas protegidas por rol
+
+**Semana 3 (14/09 – 20/09) — CRUD de productos**
+
+- [ ] Backend: `products` completo con paginación, filtros y orden, siguiendo la separación controller / service / repository
+- [ ] Frontend: feature `products` completa en las cuatro capas, con TanStack Table sobre el endpoint real
+- [ ] Documentación Swagger de los endpoints en `/api/docs`
+- [ ] Tests unitarios de `products.service` y e2e básico del módulo
+
+**Semana 4 (21/09 – 27/09) — CRUD de clientes y cierre de etapa**
+
+- [ ] Backend y frontend de `customers`, replicando el patrón de `products`
+- [ ] Listado de módulos y su estado actualizado en este README
+- [ ] Revisión cruzada de todos los pull requests pendientes antes del corte
+- [ ] Margen para lo que quede corrido de las semanas anteriores
+
+### Responsables
+
+| Frente de trabajo                      | Responsable             |
+| -------------------------------------- | ----------------------- |
+| Esquema de base de datos y migraciones | Ignacio _(a confirmar)_ |
+| Autenticación (backend)                | Nicolás _(a confirmar)_ |
+| Autenticación (frontend)               | Ambos _(a confirmar)_   |
+| CRUD de productos                      | Ignacio _(a confirmar)_ |
+| CRUD de clientes                       | Nicolás _(a confirmar)_ |
+| Integración continua y tooling         | Ambos _(a confirmar)_   |
+
+Este plan se actualiza a mano a medida que se completan tareas y al cierre de
+cada etapa. Las tareas terminadas se tachan (`~~texto~~`) en vez de borrarse, de
+modo que el historial de Git conserve el avance real del proyecto.
+
 ## Estado del proyecto
 
 El proyecto es un scaffolding con una porción vertical de referencia funcionando

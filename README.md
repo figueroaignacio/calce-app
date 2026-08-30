@@ -346,10 +346,10 @@ El detalle completo de las convenciones de código está en `CLAUDE.md`.
 | Frente de trabajo                      | Responsable             |
 | -------------------------------------- | ----------------------- |
 | Esquema de base de datos y migraciones | Ignacio _(a confirmar)_ |
-| Autenticación (backend)                | Nicolás _(a confirmar)_ |
+| Autenticación (backend)                | Santiago_(a confirmar)_ |
 | Autenticación (frontend)               | Ambos _(a confirmar)_   |
 | CRUD de productos                      | Ignacio _(a confirmar)_ |
-| CRUD de clientes                       | Nicolás _(a confirmar)_ |
+| CRUD de clientes                       | Santiago_(a confirmar)_ |
 | Integración continua y tooling         | Ambos _(a confirmar)_   |
 
 Este plan se actualiza a mano a medida que se completan tareas y al cierre de

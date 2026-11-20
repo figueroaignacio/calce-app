@@ -1,3 +1,4 @@
+
 import { type AuthSession, type AuthTokens, type JwtPayload, type User } from '@calce/types';
 import { ConflictException, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -40,7 +41,7 @@ export class AuthService {
     const user = await this.repository.create({
       email: dto.email,
       name: dto.name,
-      role: dto.role,
+      role: 'SELLER',
       passwordHash: await this.hashPassword(dto.password),
     });
 
